@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { CloudSun, LocateFixed } from "lucide-react";
 import { useEffect } from "react";
+import InstallPrompt from "@/components/pwa/InstallPrompt";
 import { cn } from "@/lib/utils";
 import HeaderSearch from "@/components/weather/HeaderSearch";
 import { reverseLookup } from "@/lib/weather";
@@ -45,10 +46,11 @@ export function AppShell({ children }: AppShellProps) {
             </span>
             <span className="text-xl">Nimbus Weather</span>
           </a>
-          <div className="flex flex-1 items-center justify-end gap-4">
+          <div className="flex flex-1 items-center justify-end gap-2 sm:gap-4">
             <div className="hidden md:block w-full max-w-md">
               <HeaderSearch />
             </div>
+            <InstallPrompt />
             <button
               onClick={useMyLocation}
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/60 px-4 py-3 md:py-2 text-sm min-h-11 shadow-sm ring-1 ring-black/5 backdrop-blur transition hover:bg-white/80 dark:bg-black/30 dark:hover:bg-black/40"
