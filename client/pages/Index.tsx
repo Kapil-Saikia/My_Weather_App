@@ -73,53 +73,7 @@ export default function Index() {
 
   return (
     <div className="space-y-6">
-      <div className="mx-auto max-w-3xl">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          <SearchBar
-            onSelect={(loc) => {
-              const label = [loc.name, loc.admin1, loc.country].filter(Boolean).join(", ");
-              setCityLabel(label);
-              setLocation(loc);
-              localStorage.setItem("nimbus:last-location", JSON.stringify(loc));
-            }}
-            className="flex-1"
-          />
-          <button
-            className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/60 px-4 py-3 sm:py-2 text-sm min-h-11 shadow-sm ring-1 ring-black/5 backdrop-blur transition hover:bg-white/80 dark:bg-black/30 dark:hover:bg-black/40"
-            onClick={() => {
-              if (!navigator.geolocation) return;
-              navigator.geolocation.getCurrentPosition(async (pos) => {
-                const { latitude, longitude } = pos.coords;
-                reverseLookup(latitude, longitude).then(async (best) => {
-                  if (best) {
-                    const label = [best.name, best.admin1, best.country].filter(Boolean).join(", ");
-                    setCityLabel(label);
-                    const loc = { name: best.name, latitude, longitude, country: best.country, admin1: best.admin1, timezone: best.timezone } as GeoLocation;
-                    setLocation(loc);
-                    localStorage.setItem("nimbus:last-location", JSON.stringify(loc));
-                  } else {
-                    const ipLoc = await ipGeoFallback();
-                    if (ipLoc) {
-                      setCityLabel([ipLoc.name, ipLoc.admin1, ipLoc.country].filter(Boolean).join(", "));
-                      setLocation(ipLoc);
-                      localStorage.setItem("nimbus:last-location", JSON.stringify(ipLoc));
-                    }
-                  }
-                }).catch(async () => {
-                  const ipLoc = await ipGeoFallback();
-                  if (ipLoc) {
-                    setCityLabel([ipLoc.name, ipLoc.admin1, ipLoc.country].filter(Boolean).join(", "));
-                    setLocation(ipLoc);
-                    localStorage.setItem("nimbus:last-location", JSON.stringify(ipLoc));
-                  }
-                });
-              });
-            }}
-          >
-            <LocateFixed className="h-4 w-4" /> Use my location
-          </button>
-        </div>
-      </div>
+      {/* Inline search + location button removed; header provides these controls across breakpoints */}
 
       {!data && !loading && !location && (
         <div className="mx-auto max-w-2xl rounded-2xl border border-white/20 bg-white/60 p-8 text-center ring-1 ring-black/5 backdrop-blur dark:bg-black/30">
