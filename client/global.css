@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Tailwind CSS theme
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * A different format will require also updating the theme in tailwind.config.ts.
+  */
+  :root {
+    /* Brand palette: cool sky to indigo */
+    --brand-50: 210 100% 97%;
+    --brand-100: 210 90% 96%;
+    --brand-200: 210 88% 92%;
+    --brand-300: 210 84% 86%;
+    --brand-400: 208 90% 76%;
+    --brand-500: 206 92% 65%;
+    --brand-600: 228 86% 67%;
+
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: var(--brand-600);
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: var(--brand-100);
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: var(--brand-200);
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: var(--brand-600);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 232 52% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 232 52% 10%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 232 52% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 206 92% 70%;
+    --primary-foreground: 232 52% 10%;
+
+    --secondary: 230 34% 18%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 230 34% 18%;
+    --muted-foreground: 215 20.2% 70.1%;
+
+    --accent: 230 34% 18%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 230 34% 22%;
+    --input: 230 34% 22%;
+    --ring: 206 92% 70%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Weather animated backdrop */
+.weather-backdrop{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.weather-backdrop:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,hsl(var(--background)) 0%,hsl(var(--background)) 40%,hsl(var(--brand-50)) 100%)}
+.weather-backdrop.sunny:before{background:linear-gradient(180deg,hsl(var(--brand-100)) 0%,hsl(var(--brand-50)) 100%)}
+.weather-backdrop.clear-night:before{background:linear-gradient(180deg,#0b1025 0%,#12172a 100%)}
+.weather-backdrop.rain:before{background:linear-gradient(180deg,#2a3342 0%,#1f2632 100%)}
+.weather-backdrop.thunder:before{background:linear-gradient(180deg,#1a202c 0%,#0f131a 100%)}
+.weather-backdrop.fog:before{background:linear-gradient(180deg,#8e9ab0 0%,#b7c1d1 100%)}
+
+.raindrop{position:absolute;width:2px;height:14px;background:linear-gradient(to bottom,rgba(174,194,224,.7),rgba(174,194,224,.1));border-radius:2px;animation:rainfall 1s linear infinite}
+@keyframes rainfall{0%{transform:translateY(-80px);opacity:1}100%{transform:translateY(100vh);opacity:.35}}
+
+.snowflake{position:absolute;color:#fff;opacity:.9;animation:snowfall 3s linear infinite}
+@keyframes snowfall{0%{transform:translateY(-100px) rotate(0);opacity:1}100%{transform:translateY(100vh) rotate(360deg);opacity:0}}
+
+.sun{position:absolute;top:10%;right:10%;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,#ffd54a 30%,#ffe680 70%);box-shadow:0 0 40px rgba(255,213,74,.6);animation:sunspin 24s linear infinite}
+@keyframes sunspin{to{transform:rotate(360deg)}}
+.sunray{position:absolute;top:5%;right:12%;width:4px;height:60px;background:rgba(255,213,74,.4);border-radius:4px;transform-origin:50% 300%;animation:sunray 6s ease-in-out infinite alternate}
+@keyframes sunray{0%{opacity:.3;transform:scale(1)}100%{opacity:.7;transform:scale(1.2)}}
+
+.moon{position:absolute;top:14%;right:14%;width:80px;height:80px;border-radius:50%;background:#f5f7ff;box-shadow:0 0 30px rgba(245,247,255,.5);animation:moon 6s ease-in-out infinite alternate}
+@keyframes moon{0%{filter:brightness(.9)}100%{filter:brightness(1.1)}}
+.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:twinkle 2.5s ease-in-out infinite alternate}
+@keyframes twinkle{0%{opacity:.3;transform:scale(1)}100%{opacity:1;transform:scale(1.5)}}
+
+.cloud{position:absolute;left:-120px;width:160px;height:60px;background:rgba(255,255,255,.9);border-radius:50px;animation:cloudmove 18s linear infinite}
+.cloud:before,.cloud:after{content:"";position:absolute;background:inherit;border-radius:50px}
+.cloud:before{width:80px;height:50px;left:18px;top:-22px}
+.cloud:after{width:70px;height:54px;right:18px;top:-28px}
+@keyframes cloudmove{0%{transform:translateX(-120px)}100%{transform:translateX(calc(100vw + 120px))}}
+
+.lightning{position:absolute;width:0;height:0;border-left:2px solid transparent;border-right:2px solid transparent;border-top:60px solid #fff700;opacity:0;animation:flash 2.6s ease-in-out infinite}
+@keyframes flash{0%,90%,100%{opacity:0}5%,10%{opacity:1}}
+
+.fog-layer{position:absolute;left:0;width:100%;height:180px;background:linear-gradient(to right,rgba(255,255,255,.1),rgba(255,255,255,.35),rgba(255,255,255,.1));border-radius:120px;animation:fogmove 14s ease-in-out infinite}
+@keyframes fogmove{0%,100%{transform:translateX(-40px);opacity:.35}50%{transform:translateX(40px);opacity:.6}}
+
+/* Ambient particles */
+.ambient-particles{position:absolute;inset:0;pointer-events:none}
+.ambient-particles .particle{position:absolute;width:4px;height:4px;background:rgba(255,255,255,.6);border-radius:50%;animation:floatp 6s linear infinite}
+@keyframes floatp{0%{transform:translateY(100vh) rotate(0);opacity:.8}100%{transform:translateY(-80px) rotate(360deg);opacity:0}}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body:not(.allow-motion) .raindrop,
+  body:not(.allow-motion) .snowflake,
+  body:not(.allow-motion) .sun,
+  body:not(.allow-motion) .sunray,
+  body:not(.allow-motion) .moon,
+  body:not(.allow-motion) .star,
+  body:not(.allow-motion) .lightning,
+  body:not(.allow-motion) .fog-layer,
+  body:not(.allow-motion) .cloud,
+  body:not(.allow-motion) .particle{animation:none !important}
+}
+
+/* Safe area utilities */
+.safe-top{padding-top:env(safe-area-inset-top)}
+.safe-bottom{padding-bottom:env(safe-area-inset-bottom)}
+.safe-x{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}

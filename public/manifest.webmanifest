@@ -1,0 +1,23 @@
+{
+  "name": "Nimbus Weather",
+  "short_name": "Nimbus",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#5b8def",
+  "description": "Beautiful, fast weather forecasts with animated backdrops.",
+  "icons": [
+    {
+      "src": "https://cdn.builder.io/o/assets%2F0f2de2f4faf44a62983d3b19c18229fd%2F106e851f453a49bc9600dbe04b52f722?alt=media&token=ff1edd5c-78b6-40ca-8865-5d9d48548d4d&apiKey=0f2de2f4faf44a62983d3b19c18229fd",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://cdn.builder.io/o/assets%2F0f2de2f4faf44a62983d3b19c18229fd%2F106e851f453a49bc9600dbe04b52f722?alt=media&token=ff1edd5c-78b6-40ca-8865-5d9d48548d4d&apiKey=0f2de2f4faf44a62983d3b19c18229fd",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#e6f2ff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b1025" media="(prefers-color-scheme: dark)" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="https://cdn.builder.io/o/assets%2F0f2de2f4faf44a62983d3b19c18229fd%2F106e851f453a49bc9600dbe04b52f722?alt=media&token=ff1edd5c-78b6-40ca-8865-5d9d48548d4d&apiKey=0f2de2f4faf44a62983d3b19c18229fd" />
+    <link rel="apple-touch-icon" href="https://cdn.builder.io/o/assets%2F0f2de2f4faf44a62983d3b19c18229fd%2F106e851f453a49bc9600dbe04b52f722?alt=media&token=ff1edd5c-78b6-40ca-8865-5d9d48548d4d&apiKey=0f2de2f4faf44a62983d3b19c18229fd" />
+    <title>Nimbus Weather</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="module" src="/client/App.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js').catch(function(){});
+        });
+      }
+    </script>
+  </body>
+</html>
