@@ -78,7 +78,17 @@ export const reverseLookup = async (lat: number, lon: number): Promise<GeoLocati
     if (typeof navigator !== 'undefined' && !navigator.onLine) return null;
   } catch {}
 
-  // Prefer direct Open‑Meteo reverse geocoding (works in preview and avoids /api proxy issues)
+  // Prefer server proxy first (same-origin) to avoid cross-origin failures in deployed environments
+  try {
+    const res = await fetchWithRetry(`/api/weather/search?q=${encodeURIComponent(`${lat},${lon}`)}`);
+    if (res.ok) {
+      const results = (await res.json()) as GeoLocation[];
+      const best = results?.[0];
+      if (best) return { ...best, latitude: lat, longitude: lon };
+    }
+  } catch {}
+
+  // Fallback to direct Open‑Meteo reverse geocoding
   try {
     const ac = new AbortController();
     const t = setTimeout(() => ac.abort(), 8000);
@@ -92,7 +102,6 @@ export const reverseLookup = async (lat: number, lon: number): Promise<GeoLocati
     try {
       r = await fetch(url.toString());
     } catch (err) {
-      // network error — swallow and fall back
       r = null;
     }
     clearTimeout(t);
@@ -110,16 +119,6 @@ export const reverseLookup = async (lat: number, lon: number): Promise<GeoLocati
           timezone: best.timezone,
         };
       }
-    }
-  } catch {}
-
-  // If direct reverse geocode fails, try server proxy as a fallback
-  try {
-    const res = await fetchWithRetry(`/api/weather/search?q=${encodeURIComponent(`${lat},${lon}`)}`);
-    if (res.ok) {
-      const results = (await res.json()) as GeoLocation[];
-      const best = results?.[0];
-      if (best) return { ...best, latitude: lat, longitude: lon };
     }
   } catch {}
 
