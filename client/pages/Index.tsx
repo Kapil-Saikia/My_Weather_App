@@ -102,15 +102,7 @@ export default function Index() {
             <WeatherBackdrop category={wmoToCategory(data.current.weather_code, data.current.is_day)} />
           </div>
           <div className="mx-auto max-w-5xl">
-            {cityLabel ? (
-              <CurrentWeather cityLabel={cityLabel} data={data} />
-            ) : (
-              <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-                <div className="h-60 animate-pulse rounded-3xl bg-white/60 ring-1 ring-black/5" />
-                <div className="h-60 animate-pulse rounded-3xl bg-white/60 ring-1 ring-black/5" />
-                <div className="h-60 animate-pulse rounded-3xl bg-white/60 ring-1 ring-black/5" />
-              </div>
-            )}
+            <CurrentWeather cityLabel={cityLabel || "Your location"} data={data} />
             <React.Suspense fallback={<div className="mt-6 h-48 animate-pulse rounded-2xl bg-white/60 ring-1 ring-black/5" />}>
               <TrendTabs data={data} />
             </React.Suspense>
